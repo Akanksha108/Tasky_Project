@@ -17,9 +17,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand fw-bold text-primary" href="#">Tasky</a>
+          <a class="navbar-brand fw-bold text-primary" href="#">TaskY</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -29,16 +30,49 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
             </ul>
-            <button type="button" class="btn btn-primary">Add New</button>
+            <button type="button" class="btn btn-primary rounded-pill"><i class="fa fa-plus" aria-hidden="true"></i>Add New</button>
           </div>
         </div>
       </nav>
 
       <!--Input Box-->
-      <div class="input-group mb-3 justify-content-center">
-        <input type="text" class="form-control" placeholder="Search Task" aria-label="Search Task" aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2">@example.com</span>
+      <div class="container">
+          <section class="mt-4">
+              <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3 ">
+                        <input type="search" class="form-control" placeholder="Search Task" aria-label="Search Task" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></span>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <!--Card-->
+          <section>
+              <div class="row">
+                  <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-outline-success"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </div>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFhfj0BAEHFmVjU1T162B1kvAyJEDYXt_DQQ&usqp=CAU" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Special title treatment</h5>
+                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                          <span class="badge bg-primary">Amazing</span>
+                        </div>
+                        <div class="card-footer text-muted ">
+                          <button type="button" class="btn btn-outline-primary float-end">Open Task</button>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            
+          </section>
       </div>
+      
 
 </body>
 </html>
