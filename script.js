@@ -10,11 +10,11 @@
         tasktitle,
         tasktype,
         taskdescription,
-    })=> `<div class="col-md-4" id=${id} onclick="deleteCard.apply(this,arguments)">
+    })=> `<div class="col-md-4" id= ${id}>
     <div class="card">
         <div class="card-header d-flex justify-content-end gap-2">
-            <button type="button" class="btn btn-outline-success"><i class="fa fa-edit"></i></button>
-            <button type="button" class="btn btn-outline-danger "><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-outline-success" id=${id}><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn btn-outline-danger" onclick="deleteCard.apply(this,arguments)" id=${id}><i class="fa fa-trash" aria-hidden="true"></i></button>
         </div>
         <img src= ${imageurl}>
         <div class="card-body">
@@ -46,6 +46,10 @@
       });
 
     };
+
+  const updateLocalStorage = () => {
+    localStorage.setItem("tasky",JSON.stringify({cards: globalStore}));
+  }
     
 
   const saveChanges = () => {
@@ -65,21 +69,28 @@
 
         //localStorage.setItem("tasky",{cards: globalStore});  We need to convert the object to string. For that use Stringify()
         // used so that upon refreshing the page we do not lose our previous data.
-        localStorage.setItem("tasky",JSON.stringify({cards: globalStore}));   //Add to localStorage
+        updateLocalStorage();   //Add to localStorage
     };
 
     const deleteCard = (event) => {
-      event = window.event;
+      if(!event)
+        event = window.event;
       const targetId = event.target.id;
-      console.log(targetId);
+      console.log(`The target id is: ${targetId}`);
+      const targetN = event.target.tagName;
+      console.log(`The target id is: ${targetN}`);
+      
 
-      const newUpdatedArray = globalStore.filter((cardObject) => cardObject.id !== targetId);
+      //const newUpdatedArray = globalStore.filter((cardObject) => cardObject.id !== targetId);
+      globalStore = globalStore.filter((cardObject) => cardObject.id !== targetId);
 
-      globalStore = newUpdatedArray;
+      //globalStore = newUpdatedArray;
+      localStorage.removeItem(globalStore);
+      updateLocalStorage();
 
       const tagName = event.target.tagName;
       //console.log(tagName);
-
+    
       if(tagName == "BUTTON"){
         return taskContainer.removeChild(
           event.target.parentElement.parentElement.parentElement
@@ -90,6 +101,8 @@
       else{
         return event.target.parentNode.parentNode.parentNode.remove();
       }
+
+      
     };
 
    
