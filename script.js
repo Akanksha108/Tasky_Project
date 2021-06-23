@@ -2,6 +2,8 @@
     const taskContainer = document.querySelector(".task_container");
     console.log(taskContainer);
 
+    const globalStore = [];
+
     const newCard = ({
         id,
         imageurl,
@@ -26,6 +28,26 @@
       </div>
   </div>`;
 
+ 
+
+  //loadInitialTaskCards function is used so that upon refreshing the page we do not lose our previous data.
+    const loadInitialTaskCards = () => {
+      const getInitialData = localStorage.getItem("tasky");
+      if(!getInitialData)  return;  //If we open the webiste in a new browser/machine and 'tasky' key isnot found, we would get error
+
+      const {cards} = JSON.parse(getInitialData);
+
+      //map around the array to generate HTML card and inject it to DOM
+      cards.map((cardObject) => {
+        const createNewCard = newCard(cardObject);
+
+        taskContainer.insertAdjacentHTML("beforeend", createNewCard);
+        globalStore.push(cardObject);
+      });
+
+    };
+    
+
   const saveChanges = () => {
     var taskData = {
         id : `${Date.now()}`,
@@ -39,7 +61,12 @@
         const createNewCard = newCard(taskData);
 
         taskContainer.insertAdjacentHTML("beforeend", createNewCard);
+        globalStore.push(taskData);
 
+        //localStorage.setItem("tasky",{cards: globalStore});  We need to convert the object to string. For that use Stringify()
+        localStorage.setItem("tasky",JSON.stringify({cards: globalStore}));   //Add to localStorage
     };
+
+   
 
     
